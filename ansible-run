@@ -6,8 +6,6 @@ sudo apt-get update -y
 sudo apt-get install -y curl git software-properties-common ansible
 
 mkdir ~/personal
-pushd ~/personal || exit
+cd ~/personal || exit
 
 git clone https://github.com/sai-koushik-macha/ansible.git
-
-popd || exit
