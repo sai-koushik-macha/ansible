@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+    source_key: "./.ssh/id_ed25519"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
+    personal: "{{ lookup('env', 'HOME') }}/personal"
+  pre_tasks:
+    - name: Update Apt
+      become: true
+      apt:
+        force_apt_get: true
+        update_cache: true
+        state: present
+  tasks:
+    - include: tasks/ssh.yml
+    - include: tasks/fonts.yml
+    - include: tasks/core.yml
+    - include: tasks/brave.yml
+    - include: tasks/window_manager.yml
+    - include: tasks/zsh-setup.yml
+    - include: tasks/dotfiles.yml
+    - include: tasks/neovim.yml
+    - include: tasks/multimedia.yml
+    - include: tasks/system_resource_tools.yml
+    - include: tasks/node-setup.yml
+    - include: tasks/node-packages.yml
+    - include: tasks/docker.yml
+    - include: tasks/python_modules.yml

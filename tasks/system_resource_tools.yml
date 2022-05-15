@@ -1,0 +1,6 @@
+- name: install system utilities for resource checking
+  become: true
+  apt:
+    name: ["htop", "ncdu", "neofetch", "wireshark"]
+  tags:
+    - system_monitoring_utilities

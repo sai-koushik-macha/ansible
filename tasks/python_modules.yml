@@ -1,0 +1,25 @@
+- name: Install Python
+  become: true
+  apt:
+    name: ["python3", "python3-pip", "python3-venv"]
+  tags:
+    - python3
+
+- name: Install virtualenv
+  shell: pip install virtualenv
+  tags:
+    - python3
+    - virtual enviroment
+
+- name: Install pipx
+  shell: pip install pipx
+  tags:
+    - python3
+    - pipx
+
+- name: install pylsp
+  shell: pipx install 'python-lsp-server[all]' --force
+  tags:
+    - python3
+    - lsp
+    - neovim

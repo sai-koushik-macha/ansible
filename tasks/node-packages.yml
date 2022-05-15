@@ -1,0 +1,58 @@
+- name: Install Yarn
+  npm:
+    name: yarn
+    global: yes
+  tags:
+    - install
+    - node
+    - yarn
+
+- name: install nodemon
+  npm:
+    name: nodemon
+    global: yes
+  tags:
+    - install
+    - nodemon
+
+- name: Install Typescript
+  npm:
+    name: typescript
+    global: yes
+  tags:
+    - install
+    - typescript
+    - lsp
+
+- name: install Typescript server
+  npm:
+    name: typescript-language-server
+    global: yes
+  tags:
+    - lsp
+    - neovim
+
+- name: install vscode-langservers-extracted
+  npm:
+    name: vscode-langservers-extracted
+    global: yes
+  tags:
+    - lsp
+    - null_ls
+    - neovim
+
+- name: install eslint
+  npm:
+    name: eslint
+    global: yes
+  tags:
+    - null_ls
+    - neovim
+
+- name: install prettier
+  npm:
+    name: prettier
+    global: yes
+  tags:
+    - null_ls
+    - neovim

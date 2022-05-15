@@ -1,0 +1,55 @@
+- name: install tmux, tree, git, fzf, xclip
+  become: true
+  apt:
+    name: ["git", "tmux", "tree", "fzf", "xclip"]
+  tags:
+    - install
+
+- name: Install System Packages 1 (build-essential, cmake, pkg-config, pthread)
+  become: true
+  apt:
+    name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
+  become: true
+  apt:
+    name: ["lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install System Packages 3 (the rest)
+  become: true
+  apt:
+    name: ["curl", "golang", "lsof", "ccache", "ninja-build", "moreutils"]
+  tags:
+    - install
+    - core
+
+- name: Install Clang
+  become: true
+  apt:
+    name: ["clang", "clang-11", "clang-12", "clangd", "clangd-11", "clangd-12"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install the language servers
+  become: true
+  apt:
+    name: ["clang-format", "clangd", "shellcheck"]
+  tags:
+    - neovim
+    - null_ls
+    - lsp
+
+- name: make the dev directories
+  shell: "mkdir -p ~/work && mkdir -p ~/personal"
+  tags:
+    - dev_directories

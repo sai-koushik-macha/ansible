@@ -1,0 +1,17 @@
+- name: Install multimedia packages
+  become: true
+  apt:
+    name:
+      [
+        "gimp",
+        "kdenlive",
+        "ffmpeg",
+        "v4l2loopback-dkms",
+        "pavucontrol",
+        "obs-studio",
+        "screenkey"
+      ]
+  tags:
+    - gimp
+    - kdenlive
+    - obs

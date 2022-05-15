@@ -1,0 +1,6 @@
+- name: zsh setup
+  become: true
+  apt:
+    name: ["zsh"]
+  tags:
+    - zsh

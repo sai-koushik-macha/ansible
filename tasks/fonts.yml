@@ -1,0 +1,19 @@
+- name: Remove Installed fonts
+  shell: rm -rf ~/.fonts
+  tags:
+    - fonts
+
+- name: ensure fonts directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.fonts"
+    state: directory
+  tags:
+    - fonts
+
+- name: Download JetBrainsMono font
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+    dest: "{{ lookup('env', 'HOME') }}/.fonts/"
+    remote_src: yes
+  tags:
+    - fonts
