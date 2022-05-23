@@ -1,7 +1,6 @@
 - name: Remove neovim
   shell: rm -rf ~/neovim
   tags:
-    - install
     - neovim
 
 - name: download neovim repository
@@ -10,7 +9,6 @@
     dest: "{{ lookup('env', 'HOME') }}/neovim"
     update: yes
   tags:
-    - install
     - neovim
 
 - name: install build essentials and neovim dependicies packages
@@ -31,21 +29,29 @@
         "curl",
         "lua5.1",
         "luarocks",
-        "python3-neovim",
+        "build-essential",
         "ripgrep",
       ]
   tags:
-    - install
+    - build_essentials
     - neovim
 
 - name: install neovim
   shell: "cd {{ lookup('env', 'HOME') }}/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo"
   tags:
-    - install
     - neovim
 
 - name: install neovim globally
   shell: "cd {{ lookup('env', 'HOME') }}/neovim && sudo make install"
+  tags:
+    - neovim
+
+- name: get packer
+  ansible.builtin.git:
+    repo: "https://github.com/wbthomason/packer.nvim"
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    depth: 1
+    update: yes
   tags:
     - neovim
 
@@ -54,7 +60,6 @@
   shell: luarocks install luacheck
   tags:
     - null_ls
-    - neovim
 
 - name: clone lua-language server
   ansible.builtin.git:
@@ -63,13 +68,11 @@
     recursive: yes
     update: yes
   tags:
-    - neovim
     - lsp
     - lua_lang
 
 - name: build lua-language-server
   shell: "cd ~/personal/lua-language-server; cd 3rd/luamake;./compile/install.sh;cd ../..;./3rd/luamake/luamake rebuild"
   tags:
-    - neovim
     - lsp
     - lua_lang

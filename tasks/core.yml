@@ -11,7 +11,6 @@
     name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
   tags:
     - install
-    - neovim
     - core
 
 - name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
@@ -20,7 +19,6 @@
     name: ["lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
   tags:
     - install
-    - neovim
     - core
 
 - name: Install System Packages 3 (the rest)
@@ -37,17 +35,15 @@
     name: ["clang", "clang-11", "clang-12", "clangd", "clangd-11", "clangd-12"]
   tags:
     - install
-    - neovim
     - core
+    - lsp
 
 - name: Install the language servers
   become: true
   apt:
     name: ["clang-format", "clangd", "shellcheck"]
   tags:
-    - neovim
     - null_ls
-    - lsp
 
 - name: make the dev directories
   shell: "mkdir -p ~/work && mkdir -p ~/personal"

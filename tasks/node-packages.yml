@@ -30,7 +30,6 @@
     global: yes
   tags:
     - lsp
-    - neovim
 
 - name: install vscode-langservers-extracted
   npm:
@@ -39,7 +38,6 @@
   tags:
     - lsp
     - null_ls
-    - neovim
 
 - name: install eslint
   npm:
@@ -47,7 +45,6 @@
     global: yes
   tags:
     - null_ls
-    - neovim
 
 - name: install prettier
   npm:
@@ -55,4 +52,3 @@
     global: yes
   tags:
     - null_ls
-    - neovim
