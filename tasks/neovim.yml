@@ -7,6 +7,7 @@
   ansible.builtin.git:
     repo: "https://github.com/neovim/neovim.git"
     dest: "{{ lookup('env', 'HOME') }}/neovim"
+    depth: 1
     update: yes
   tags:
     - neovim
@@ -42,7 +43,8 @@
     - neovim
 
 - name: install neovim globally
-  shell: "cd {{ lookup('env', 'HOME') }}/neovim && sudo make install"
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"
   tags:
     - neovim
 

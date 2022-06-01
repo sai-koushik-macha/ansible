@@ -29,6 +29,13 @@
     - install
     - core
 
+- name: install window manager
+  become: true
+  apt:
+    name: ["i3", "suckless-tools"]
+  tags:
+    - i3
+
 - name: Install Clang
   become: true
   apt:

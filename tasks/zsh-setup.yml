@@ -4,3 +4,9 @@
     name: ["zsh"]
   tags:
     - zsh
+
+- name: change user shell to zsh
+  become: true
+  shell: usermod --shell $(which zsh) {{ user }}
+  tags:
+    - zsh

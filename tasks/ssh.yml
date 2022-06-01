@@ -30,7 +30,7 @@
 
 - name: Set authorized key took from file
   authorized_key:
-    user: sai
+    user: "{{ user }}"
     state: present
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
   tags:

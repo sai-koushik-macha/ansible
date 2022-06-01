@@ -1,6 +1,34 @@
+- name: let non root to capture traffic
+  debconf:
+    name: wireshark-common
+    question: wireshark-common/install-setuid
+    vtype: boolean
+    value: true
+  become: yes
+  tags:
+    - wireshark
+
 - name: install system utilities for resource checking
   become: true
   apt:
     name: ["htop", "ncdu", "neofetch", "wireshark"]
   tags:
     - system_monitoring_utilities
+    - wireshark
+
+- name: create a new group wireshark
+  become: true
+  ansible.builtin.group:
+    name: wireshark
+    state: present
+  tags:
+    - wireshark
+
+- name: add user to the wireshark group
+  become: true
+  ansible.builtin.user:
+    name: "{{ user }}"
+    groups: wireshark
+    append: yes
+  tags:
+    - wireshark
