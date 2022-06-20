@@ -6,13 +6,15 @@
     - python3
 
 - name: Install virtualenv
-  shell: pip install virtualenv
+  pip:
+    name: virtualenv
   tags:
     - python3
     - virtual enviroment
 
 - name: Install pipx
-  shell: pip install pipx
+  pip:
+    name: pipx
   tags:
     - python3
     - pipx

@@ -28,6 +28,7 @@
         "pkg-config",
         "unzip",
         "curl",
+        "doxygen",
         "lua5.1",
         "luarocks",
         "build-essential",

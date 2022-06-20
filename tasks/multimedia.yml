@@ -9,9 +9,25 @@
         "v4l2loopback-dkms",
         "pavucontrol",
         "obs-studio",
-        "screenkey"
+        "screenkey",
       ]
   tags:
     - gimp
     - kdenlive
     - obs
+
+- name: Install yt-dlp
+  become: true
+  get_url:
+    url: https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+    dest: /usr/local/bin/yt-dlp
+  tags:
+    - yt-dlp
+
+- name: change permissions for yt-dlp
+  become: true
+  file:
+    path: /usr/local/bin/yt-dlp
+    mode: 0777
+  tags:
+    - yt-dlp
