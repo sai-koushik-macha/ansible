@@ -39,18 +39,18 @@
     - install
     - core
 
-- name: install window manager and urxvt
+- name: install window manager and kitty
   become: true
   apt:
-    name: ["i3", "feh", "compton", "rxvt-unicode", "suckless-tools"]
+    name: ["i3", "feh", "compton", "kitty", "suckless-tools"]
   tags:
     - i3
-    - urxvt
+    - kitty
 
-- name: set urxvt as terminal
-  shell: grep "export TERMINAL=urxvt" ~/.profile || echo "export TERMINAL=urxvt" >> ~/.profile
+- name: set kitty as terminal
+  shell: grep "export TERMINAL=kitty" ~/.profile || echo "export TERMINAL=kitty" >> ~/.profile
   tags:
-    - urxvt
+    - kitty
 
 - name: Install Clang
   become: true

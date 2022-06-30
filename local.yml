@@ -13,7 +13,6 @@
         state: present
   tasks:
     - import_tasks: tasks/ssh.yml
-    - import_tasks: tasks/fonts.yml
     - import_tasks: tasks/core.yml
     - import_tasks: tasks/brave.yml
     - import_tasks: tasks/zsh-setup.yml
