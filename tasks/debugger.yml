@@ -1,0 +1,20 @@
+- name: Debugger - JavaScript
+  ansible.builtin.git:
+    repo: "git@github.com:microsoft/vscode-node-debug2.git"
+    dest: "{{ personal }}/microsoft/vscode-node-debug2"
+    depth: 1
+  tags:
+    - install
+    - debugger
+
+- name: Install the required npm packages
+  shell: "cd {{ personal }}/microsoft/vscode-node-debug2 && npm install"
+  tags:
+    - install
+    - debugger
+
+- name: Build the vscode-node-debug2
+  shell: "cd {{ personal }}/microsoft/vscode-node-debug2 && npm run build"
+  tags:
+    - install
+    - debugger

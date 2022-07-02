@@ -47,6 +47,21 @@
     - i3
     - kitty
 
+- name: ensure fonts directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
+    state: directory
+  tags:
+    - fonts
+
+- name: Dowload Go Mono Font
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Go-Mono.zip
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts/"
+    remote_src: yes
+  tags:
+    - fonts
+
 - name: set kitty as terminal
   shell: grep "export TERMINAL=kitty" ~/.profile || echo "export TERMINAL=kitty" >> ~/.profile
   tags:
@@ -68,8 +83,19 @@
   tags:
     - null_ls
 
-- name: make the dev directories
-  shell: "mkdir -p ~/work && mkdir -p ~/personal"
+- name: create the personal directory
+  file:
+    dest: "{{ personal }}"
+    mode: 0775
+    state: directory
+  tags:
+    - dev_directories
+
+- name: create the work directory
+  file:
+    dest: "{{ work }}"
+    mode: 0775
+    state: directory
   tags:
     - dev_directories
 

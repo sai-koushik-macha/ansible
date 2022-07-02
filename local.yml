@@ -3,6 +3,7 @@
     source_key: "./.ssh/id_ed25519"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
     personal: "{{ lookup('env', 'HOME') }}/personal"
+    work: "{{ lookup('env', 'HOME') }}/work"
     user: "{{ lookup('env', 'USER') }}"
   pre_tasks:
     - name: Update Apt
@@ -24,3 +25,4 @@
     - import_tasks: tasks/node-packages.yml
     - import_tasks: tasks/docker.yml
     - import_tasks: tasks/python_modules.yml
+    - import_tasks: tasks/debugger.yml
