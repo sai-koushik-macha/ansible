@@ -4,6 +4,7 @@
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
     personal: "{{ lookup('env', 'HOME') }}/personal"
     work: "{{ lookup('env', 'HOME') }}/work"
+    neovim: "{{ lookup('env', 'HOME') }}/neovim"
     user: "{{ lookup('env', 'USER') }}"
   pre_tasks:
     - name: Update Apt

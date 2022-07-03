@@ -19,19 +19,10 @@
   tags:
     - zsh
 
-- name: Install zsh-syntax-highlighting
+- name: Download zplug
   ansible.builtin.git:
-    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    dest: "{{ lookup('env', 'HOME') }}/.local/share/zsh/plugins/zsh-syntax-highlighting"
-    depth: 1
-    update: yes
-  tags:
-    - zsh
-
-- name: Install zsh-autosuggestions
-  ansible.builtin.git:
-    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "{{ lookup('env', 'HOME') }}/.local/share/zsh/plugins/zsh-autosuggestions"
+    repo: "https://github.com/zplug/zplug.git"
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/zsh/zplug"
     depth: 1
     update: yes
   tags:

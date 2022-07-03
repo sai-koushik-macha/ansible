@@ -1,12 +1,14 @@
 - name: Remove neovim
-  shell: rm -rf ~/neovim
+  file:
+    dest: "{{ neovim }}"
+    state: absent
   tags:
     - neovim
 
 - name: download neovim repository
   ansible.builtin.git:
     repo: "https://github.com/neovim/neovim.git"
-    dest: "{{ lookup('env', 'HOME') }}/neovim"
+    dest: "{{ neovim }}"
     depth: 1
     update: yes
   tags:
@@ -64,18 +66,27 @@
   tags:
     - null_ls
 
+- name: Remove lua-language-server if present
+  file:
+    dest: "{{ personal }}/lua-language-server"
+    state: absent
+  tags:
+    - lsp
+    - lua_lang
+
 - name: clone lua-language server
   ansible.builtin.git:
     repo: "https://github.com/sumneko/lua-language-server"
-    dest: "{{ lookup('env', 'HOME') }}/personal/lua-language-server"
+    dest: "{{ personal }}/lua-language-server"
     recursive: yes
     update: yes
+    depth: 1
   tags:
     - lsp
     - lua_lang
 
 - name: build lua-language-server
-  shell: "cd ~/personal/lua-language-server; cd 3rd/luamake;./compile/install.sh;cd ../..;./3rd/luamake/luamake rebuild"
+  shell: "cd {{ personal }}/lua-language-server; cd 3rd/luamake;./compile/install.sh;cd ../..;./3rd/luamake/luamake rebuild"
   tags:
     - lsp
     - lua_lang
