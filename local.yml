@@ -1,11 +1,13 @@
 - hosts: localhost
   vars:
+    home: "{{ lookup('env', 'HOME') }}"
     source_key: "./.ssh/id_ed25519"
-    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
-    personal: "{{ lookup('env', 'HOME') }}/personal"
-    work: "{{ lookup('env', 'HOME') }}/work"
-    neovim: "{{ lookup('env', 'HOME') }}/neovim"
+    dest_key: "{{ home }}/.ssh/id_ed25519"
+    personal: "{{ home }}/personal"
+    work: "{{ home }}/work"
+    neovim: "{{ home }}/neovim"
     user: "{{ lookup('env', 'USER') }}"
+    profile: "{{ home }}/.profile"
   pre_tasks:
     - name: Update Apt
       become: true
@@ -28,3 +30,4 @@
     - import_tasks: tasks/python_modules.yml
     - import_tasks: tasks/debugger.yml
     - import_tasks: tasks/kvm.yml
+    - import_tasks: tasks/insomnia.yml

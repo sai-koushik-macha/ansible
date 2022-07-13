@@ -2,51 +2,39 @@
   become: true
   apt:
     name: ["nodejs", "npm"]
-  tags:
-    - install
-    - node
+  tags: &tags_for_node ["install", "node"]
 
 - name: npmjs prefix
-  shell: mkdir -p ~/.local/.npm-global
-  tags:
-    - install
-    - node
+  file:
+    dest: "{{ home }}/.local/.npm-global"
+    mode: 0775
+    state: directory
+  tags: *tags_for_node
 
 - name: add npmjs to path
-  shell: PATH=~/.local/.npm-global/bin:$PATH
-  tags:
-    - install
-    - node
+  lineinfile:
+    dest: "{{ profile }}"
+    regexp: ".npm"
+    line: "export PATH=~/.local/.npm-global/bin:$PATH"
+  tags: *tags_for_node
 
 - name: npmjs global settings
   shell: npm config set prefix '~/.local/.npm-global'
-  tags:
-    - install
-    - node
-
-- name: npmjs global settings export path in case I don't have dotfiles installed
-  shell: export PATH=~/.local/.npm-global/bin:$PATH
-  tags:
-    - install
-    - node
-    - npm-path
+  tags: *tags_for_node
 
 - name: Install N
   npm:
     name: n
     global: yes
-  tags:
-    - install
-    - node
+  tags: *tags_for_node
 
 - name: Set n place
-  shell: export N_PREFIX="$HOME/.local/n"
-  tags:
-    - install
-    - node
+  lineinfile:
+    dest: "{{ profile }}"
+    regexp: "N_PREFIX"
+    line: export N_PREFIX="$HOME/.local/n"
+  tags: *tags_for_node
 
 - name: Install correct version of Node
-  shell: n 16
-  tags:
-    - install
-    - node
+  shell: ". {{ profile }} && n 16"
+  tags: *tags_for_node

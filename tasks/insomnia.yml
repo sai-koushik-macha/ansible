@@ -1,0 +1,13 @@
+- name: Set Insomnia key
+  become: true
+  shell:
+    echo "deb [trusted=yes arch=amd64] https://download.konghq.com/insomnia-ubuntu/ default all" \
+    | sudo tee -a /etc/apt/sources.list.d/insomnia.list
+  tags: &tags_for_insomnia ["install", "insomnia"]
+
+- name: Insomnia apt installation
+  become: true
+  apt:
+    update_cache: yes
+    name: insomnia
+  tags: *tags_for_insomnia

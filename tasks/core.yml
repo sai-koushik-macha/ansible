@@ -9,17 +9,13 @@
   become: true
   apt:
     name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
-  tags:
-    - install
-    - core
+  tags: &tags_for_core ["install", "core"]
 
 - name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
   become: true
   apt:
     name: ["lua5.1", "unzip", "libtool", "libtool-bin", "gettext"]
-  tags:
-    - install
-    - core
+  tags: *tags_for_core
 
 - name: Install System Packages 3 (the rest)
   become: true
@@ -35,37 +31,33 @@
         "ninja-build",
         "moreutils",
       ]
-  tags:
-    - install
-    - core
+  tags: *tags_for_core
 
 - name: install window manager and kitty
   become: true
   apt:
     name: ["i3", "feh", "compton", "kitty", "suckless-tools"]
-  tags:
-    - i3
-    - kitty
+  tags: &tags_for_wm ["install", "i3", "kitty", "fonts"]
 
 - name: ensure fonts directory
   file:
     path: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
     state: directory
-  tags:
-    - fonts
+  tags: *tags_for_wm
 
 - name: Dowload Go Mono Font
   ansible.builtin.unarchive:
     src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Go-Mono.zip
     dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts/"
     remote_src: yes
-  tags:
-    - fonts
+  tags: *tags_for_wm
 
 - name: set kitty as terminal
-  shell: grep "export TERMINAL=kitty" ~/.profile || echo "export TERMINAL=kitty" >> ~/.profile
-  tags:
-    - kitty
+  lineinfile:
+    dest: "{{ profile }}"
+    regexp: "TERMINAL"
+    line: "export TERMINAL=kitty"
+  tags: *tags_for_wm
 
 - name: Install Clang
   become: true
@@ -114,6 +106,12 @@
     - rust
 
 - name: set cargo path
-  shell: export "$HOME/.cargo/env"
+  shell: ". $HOME/.cargo/env"
   tags:
+    - rust
+
+- name: install stylua
+  shell: ". $HOME/.cargo/env && cargo install stylua"
+  tags:
+    - null_ls
     - rust
