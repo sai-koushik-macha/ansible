@@ -30,4 +30,3 @@
     - import_tasks: tasks/python_modules.yml
     - import_tasks: tasks/debugger.yml
     - import_tasks: tasks/kvm.yml
-    - import_tasks: tasks/insomnia.yml
