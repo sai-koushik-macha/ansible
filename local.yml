@@ -8,6 +8,7 @@
     neovim: "{{ home }}/neovim"
     user: "{{ lookup('env', 'USER') }}"
     profile: "{{ home }}/.profile"
+    zsh_plugins: "{{ home }}/.local/share/zsh/plugins"
   pre_tasks:
     - name: Update Apt
       become: true

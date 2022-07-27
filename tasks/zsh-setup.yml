@@ -13,16 +13,25 @@
 
 - name: Create a directory for zsh
   file:
-    dest: "{{ lookup('env', 'HOME') }}/.local/share/zsh"
+    dest: "{{ zsh_plugins }}"
     mode: 0700
     state: directory
   tags:
     - zsh
 
-- name: Download zplug
+- name: Install zsh-syntax-highlighting
   ansible.builtin.git:
-    repo: "https://github.com/zplug/zplug.git"
-    dest: "{{ lookup('env', 'HOME') }}/.local/share/zsh/zplug"
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    dest: "{{ zsh_plugins }}/zsh-syntax-highlighting"
+    depth: 1
+    update: yes
+  tags:
+    - zsh
+
+- name: Install zsh-autosuggestions
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "{{ zsh_plugins }}/zsh-autosuggestions"
     depth: 1
     update: yes
   tags:
