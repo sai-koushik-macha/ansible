@@ -1,0 +1,21 @@
+- name: install window manager
+  become: true
+  apt:
+    name: ["i3", "feh", "compton", "suckless-tools"]
+  tags:
+    - i3
+
+- name: install kitty
+  become: true
+  apt:
+    name: ["kitty"]
+  tags:
+    - kitty
+
+- name: set kitty as terminal
+  lineinfile:
+    dest: "{{ profile }}"
+    regexp: "TERMINAL"
+    line: "export TERMINAL=kitty"
+  tags:
+    - kitty

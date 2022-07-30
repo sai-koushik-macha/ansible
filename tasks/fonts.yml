@@ -1,0 +1,54 @@
+- name: ensure fonts directory
+  file:
+    path: "{{ fonts_dir }}"
+    state: directory
+  tags:
+    - fonts
+
+- name: Hack exists
+  shell: "ls {{ fonts_dir }}/Hack*Nerd*Font*Complete*"
+  register: hack_exists
+  ignore_errors: yes
+  tags:
+    - fonts
+
+- name: Download Hack
+  when: hack_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
+    dest: "{{ fonts_dir }}"
+    remote_src: yes
+  tags:
+    - fonts
+
+- name: JetBrainsMono exists
+  register: jetbrains_exists
+  shell: "ls {{ fonts_dir }}/JetBrains*Mono*Nerd*Font*Complete*"
+  ignore_errors: yes
+  tags:
+    - fonts
+
+- name: Download JetBrainsMono font
+  when: jetbrains_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+    dest: "{{ fonts_dir }}"
+    remote_src: yes
+  tags:
+    - fonts
+
+- name: Fira Code exists
+  register: firacode_exists
+  shell: "ls {{ fonts_dir }}/Fira*Code*Nerd*Font*Complete*"
+  ignore_errors: yes
+  tags:
+    - fonts
+
+- name: Download Fira Code font
+  when: firacode_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+    dest: "{{ fonts_dir }}"
+    remote_src: yes
+  tags:
+    - fonts

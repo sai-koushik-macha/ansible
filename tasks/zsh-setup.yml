@@ -36,3 +36,12 @@
     update: yes
   tags:
     - zsh
+
+- name: Install Powerlevel10k
+  ansible.builtin.git:
+    repo: "https://github.com/romkatv/powerlevel10k.git"
+    dest: "{{ zsh_plugins }}/powerlevel10k"
+    depth: 1
+    update: yes
+  tags:
+    - zsh

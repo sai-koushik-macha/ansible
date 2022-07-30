@@ -9,6 +9,7 @@
     user: "{{ lookup('env', 'USER') }}"
     profile: "{{ home }}/.profile"
     zsh_plugins: "{{ home }}/.local/share/zsh/plugins"
+    fonts_dir: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
   pre_tasks:
     - name: Update Apt
       become: true
@@ -19,6 +20,8 @@
   tasks:
     - import_tasks: tasks/ssh.yml
     - import_tasks: tasks/core.yml
+    - import_tasks: tasks/desktop.yml
+    - import_tasks: tasks/fonts.yml
     - import_tasks: tasks/brave.yml
     - import_tasks: tasks/zsh-setup.yml
     - import_tasks: tasks/dotfiles.yml

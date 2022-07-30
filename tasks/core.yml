@@ -33,36 +33,10 @@
       ]
   tags: *tags_for_core
 
-- name: install window manager and kitty
-  become: true
-  apt:
-    name: ["i3", "feh", "compton", "kitty", "suckless-tools"]
-  tags: &tags_for_wm ["install", "i3", "kitty", "fonts"]
-
-- name: ensure fonts directory
-  file:
-    path: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
-    state: directory
-  tags: *tags_for_wm
-
-- name: Dowload Go Mono Font
-  ansible.builtin.unarchive:
-    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Go-Mono.zip
-    dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts/"
-    remote_src: yes
-  tags: *tags_for_wm
-
-- name: set kitty as terminal
-  lineinfile:
-    dest: "{{ profile }}"
-    regexp: "TERMINAL"
-    line: "export TERMINAL=kitty"
-  tags: *tags_for_wm
-
 - name: Install Clang
   become: true
   apt:
-    name: ["clang", "clang-11",  "clangd", "clangd-11"]
+    name: ["clang", "clang-11", "clangd", "clangd-11"]
   tags:
     - install
     - core
