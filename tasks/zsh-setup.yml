@@ -11,18 +11,19 @@
   tags:
     - zsh
 
-- name: Create a directory for zsh
-  file:
+- name: Clone oh-my-zsh
+  ansible.builtin.git:
+    repo: "https://github.com/ohmyzsh/ohmyzsh.git"
     dest: "{{ zsh_plugins }}"
-    mode: 0700
-    state: directory
+    depth: 1
+    update: yes
   tags:
     - zsh
 
 - name: Install zsh-syntax-highlighting
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    dest: "{{ zsh_plugins }}/zsh-syntax-highlighting"
+    dest: "{{ zsh_plugins }}/custom/plugins/zsh-syntax-highlighting"
     depth: 1
     update: yes
   tags:
@@ -31,16 +32,16 @@
 - name: Install zsh-autosuggestions
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "{{ zsh_plugins }}/zsh-autosuggestions"
+    dest: "{{ zsh_plugins }}/custom/plugins/zsh-autosuggestions"
     depth: 1
     update: yes
   tags:
     - zsh
 
-- name: Install Powerlevel10k
+- name: Install powerlevel10k
   ansible.builtin.git:
     repo: "https://github.com/romkatv/powerlevel10k.git"
-    dest: "{{ zsh_plugins }}/powerlevel10k"
+    dest: "{{ zsh_plugins }}/custom/themes/powerlevel10k"
     depth: 1
     update: yes
   tags:

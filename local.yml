@@ -8,7 +8,7 @@
     neovim: "{{ home }}/neovim"
     user: "{{ lookup('env', 'USER') }}"
     profile: "{{ home }}/.profile"
-    zsh_plugins: "{{ home }}/.local/share/zsh/plugins"
+    zsh_plugins: "{{ home }}/.local/share/oh-my-zsh"
     fonts_dir: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
   pre_tasks:
     - name: Update Apt
