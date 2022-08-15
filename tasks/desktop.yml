@@ -4,3 +4,10 @@
     name: ["i3", "feh", "picom", "suckless-tools"]
   tags:
     - i3
+
+- name: Install urxvt
+  become: true
+  apt:
+    name: ["rxvt-unicode", "xclip"]
+  tags:
+    - urxvt

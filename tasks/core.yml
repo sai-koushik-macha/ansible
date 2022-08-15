@@ -1,9 +1,12 @@
-- name: install tmux, tree, git, fzf, xclip
+- name: install tmux, tree, git, fzf, xclip, tldr
   become: true
   apt:
-    name: ["git", "tmux", "tree", "fzf", "xclip"]
+    name: ["git", "tmux", "tree", "fzf", "xclip", "tldr"]
   tags:
     - install
+    - tmux
+    - fzf
+    - tldr
 
 - name: Install System Packages 1 (build-essential, cmake, pkg-config, pthread)
   become: true

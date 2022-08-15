@@ -1,12 +1,42 @@
-- name: ensure fonts directory
+- name: ensure fonts directory is present
   file:
     path: "{{ fonts_dir }}"
     state: directory
   tags:
     - fonts
 
+- name: ensure go fonts directory is present
+  file:
+    path: "{{ fonts_dir }}/Go"
+    state: directory
+  tags:
+    - fonts
+
+- name: Go exists
+  shell: "ls {{ fonts_dir }}/Go/Go*Mono*"
+  register: go_exists
+  ignore_errors: yes
+  tags:
+    - fonts
+
+- name: Download Go
+  when: go_exists is failed
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Go-Mono.zip
+    dest: "{{ fonts_dir }}/Go"
+    remote_src: yes
+  tags:
+    - fonts
+
+- name: ensure hack fonts directory is present
+  file:
+    path: "{{ fonts_dir }}/Hack"
+    state: directory
+  tags:
+    - fonts
+
 - name: Hack exists
-  shell: "ls {{ fonts_dir }}/Hack*Nerd*Font*Complete*"
+  shell: "ls {{ fonts_dir }}/Hack/Hack*Nerd*Font*Complete*"
   register: hack_exists
   ignore_errors: yes
   tags:
@@ -16,14 +46,21 @@
   when: hack_exists is failed
   ansible.builtin.unarchive:
     src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
-    dest: "{{ fonts_dir }}"
+    dest: "{{ fonts_dir }}/Hack"
     remote_src: yes
+  tags:
+    - fonts
+
+- name: ensure jetbrains fonts directory is present
+  file:
+    path: "{{ fonts_dir }}/JetBrains"
+    state: directory
   tags:
     - fonts
 
 - name: JetBrainsMono exists
   register: jetbrains_exists
-  shell: "ls {{ fonts_dir }}/JetBrains*Mono*Nerd*Font*Complete*"
+  shell: "ls {{ fonts_dir }}/JetBrains/JetBrains*Mono*Nerd*Font*Complete*"
   ignore_errors: yes
   tags:
     - fonts
@@ -32,14 +69,21 @@
   when: jetbrains_exists is failed
   ansible.builtin.unarchive:
     src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
-    dest: "{{ fonts_dir }}"
+    dest: "{{ fonts_dir }}/JetBrains"
     remote_src: yes
+  tags:
+    - fonts
+
+- name: ensure firecode fonts directory is present
+  file:
+    path: "{{ fonts_dir }}/Fire"
+    state: directory
   tags:
     - fonts
 
 - name: Fira Code exists
   register: firacode_exists
-  shell: "ls {{ fonts_dir }}/Fira*Code*Nerd*Font*Complete*"
+  shell: "ls {{ fonts_dir }}/Fire/Fira*Code*Nerd*Font*Complete*"
   ignore_errors: yes
   tags:
     - fonts
@@ -48,7 +92,7 @@
   when: firacode_exists is failed
   ansible.builtin.unarchive:
     src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-    dest: "{{ fonts_dir }}"
+    dest: "{{ fonts_dir }}/Fire"
     remote_src: yes
   tags:
     - fonts

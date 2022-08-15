@@ -30,7 +30,7 @@
     - import_tasks: tasks/system_resource_tools.yml
     - import_tasks: tasks/node-setup.yml
     - import_tasks: tasks/node-packages.yml
-    - import_tasks: tasks/docker.yml
     - import_tasks: tasks/python_modules.yml
     - import_tasks: tasks/debugger.yml
+    - import_tasks: tasks/docker.yml
     - import_tasks: tasks/kvm.yml
