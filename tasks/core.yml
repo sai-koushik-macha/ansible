@@ -36,19 +36,31 @@
       ]
   tags: *tags_for_core
 
-- name: Install Clang
+- name: Install Clang and CPP related
   become: true
   apt:
-    name: ["clang", "clang-11", "clangd", "clangd-11"]
+    name:
+      [
+        "clang",
+        "clangd",
+        "clang-format",
+        "clang-tidy",
+        "clang-tools",
+        "cmake",
+        "make",
+        "ninja-build",
+      ]
   tags:
     - install
     - core
+    - cpp
     - lsp
+    - null_ls
 
 - name: Install the language servers
   become: true
   apt:
-    name: ["clang-format", "clangd", "shellcheck"]
+    name: ["shellcheck"]
   tags:
     - null_ls
 
