@@ -27,38 +27,10 @@
     - install
     - node
     - typescript
-    - lsp
-
-- name: install Typescript server
-  npm:
-    name: typescript-language-server
-    state: latest
-    global: yes
-  tags:
-    - node
-    - lsp
-
-- name: install vscode-langservers-extracted
-  npm:
-    name: vscode-langservers-extracted
-    state: latest
-    global: yes
-  tags:
-    - node
-    - lsp
 
 - name: install eslint
   npm:
     name: eslint
-    state: latest
-    global: yes
-  tags:
-    - node
-    - null_ls
-
-- name: install prettier
-  npm:
-    name: prettier
     state: latest
     global: yes
   tags:

@@ -13,7 +13,3 @@
   pip:
     name: pipx
   tags: *tags_for_python
-
-- name: install pylsp
-  shell: pipx install 'python-lsp-server[all]' --force
-  tags: *tags_for_python

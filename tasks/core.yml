@@ -36,34 +36,6 @@
       ]
   tags: *tags_for_core
 
-- name: Install Clang and CPP related
-  become: true
-  apt:
-    name:
-      [
-        "clang",
-        "clangd",
-        "clang-format",
-        "clang-tidy",
-        "clang-tools",
-        "cmake",
-        "make",
-        "ninja-build",
-      ]
-  tags:
-    - install
-    - core
-    - cpp
-    - lsp
-    - null_ls
-
-- name: Install the language servers
-  become: true
-  apt:
-    name: ["shellcheck"]
-  tags:
-    - null_ls
-
 - name: create the personal directory
   file:
     dest: "{{ personal }}"
@@ -101,15 +73,4 @@
 - name: install rust/cargo
   shell: /tmp/sh.rustup.rs -y
   tags:
-    - rust
-
-- name: set cargo path
-  shell: ". $HOME/.cargo/env"
-  tags:
-    - rust
-
-- name: install stylua
-  shell: ". $HOME/.cargo/env && cargo install stylua"
-  tags:
-    - null_ls
     - rust
