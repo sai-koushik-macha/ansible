@@ -11,6 +11,13 @@
   tags:
     - zsh
 
+- name: Remove ohmyzsh if present
+  file:
+    dest: "{{ zsh_plugins }}"
+    state: absent
+  tags:
+    - zsh
+
 - name: Clone oh-my-zsh
   ansible.builtin.git:
     repo: "https://github.com/ohmyzsh/ohmyzsh.git"

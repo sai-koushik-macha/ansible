@@ -52,15 +52,6 @@
   tags:
     - dev_directories
 
-- name: download anime repository
-  ansible.builtin.git:
-    repo: "git@github.com:sai-koushik-macha/anime.git"
-    dest: "{{ personal }}/anime"
-    depth: 1
-    update: yes
-  tags:
-    - anime
-
 - name: Download Installer
   get_url:
     url: https://sh.rustup.rs

@@ -10,11 +10,10 @@
         "pavucontrol",
         "obs-studio",
         "screenkey",
+        "shutter",
       ]
   tags:
-    - gimp
-    - kdenlive
-    - obs
+    - graphics
 
 - name: Install yt-dlp
   become: true

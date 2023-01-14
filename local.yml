@@ -26,11 +26,10 @@
     - import_tasks: tasks/zsh-setup.yml
     - import_tasks: tasks/dotfiles.yml
     - import_tasks: tasks/neovim.yml
-    - import_tasks: tasks/multimedia.yml
-    - import_tasks: tasks/system_resource_tools.yml
     - import_tasks: tasks/node-setup.yml
     - import_tasks: tasks/node-packages.yml
     - import_tasks: tasks/python_modules.yml
-    - import_tasks: tasks/debugger.yml
     - import_tasks: tasks/docker.yml
     - import_tasks: tasks/kvm.yml
+    - import_tasks: tasks/system_resource_tools.yml
+    - import_tasks: tasks/multimedia.yml
